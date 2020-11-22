@@ -1,19 +1,10 @@
-local MoveSystem = {}
-MoveSystem.__index = MoveSystem
+local lovetoys = require("lovetoys/lovetoys")
 
-local DrawSystem = {}
-DrawSystem.__index = DrawSystem
+local MoveSystem = lovetoys.class("MoveSystem", lovetoys.System)
+local DrawSystem = lovetoys.class("DrawSystem", lovetoys.System)
 
-local System = {
-  MoveSystem = MoveSystem, DrawSystem = DrawSystem
-}
-
-print("System")
-
-function MoveSystem:MoveSystemInit(lovetoys)
-  local self = { MoveSystem = lovetoys.class("MoveSystem", lovetoys.System), }
-  setmetatable(self, MoveSystem)
-  return self
+function MoveSystem:MoveSystemInit()
+  print("Create Move System...")
 end
 
 function MoveSystem:requires()
@@ -29,24 +20,25 @@ function MoveSystem:update(dt)
   end
 end
 
-function DrawSystem:DrawSystemInit(lovetoys)
-  local self = { DrawSystem = lovetoys.class("DrawSystem", lovetoys.System), }
-  setmetatable(self, DrawSystem)
-  return self
+
+
+function DrawSystem:DrawSystemInit()
+  print("Create Draw System...")
 end
 
 function DrawSystem:requires()
-  print("sup")
-
   return {"position"}
 end
 
 function DrawSystem:draw()
-  print("hello")
   for _, entity in pairs(self.targets) do
     love.graphics.rectangle("fill", entity:get("position").x, entity:get("position").y, 10, 10)
   end
 end
 
-return System
+system = {
+  MoveSystem = MoveSystem, DrawSystem = DrawSystem
+}
+
+return system
 

@@ -1,17 +1,12 @@
-Player = {
-  Entity = {}
-}
+local lovetoys = require("lovetoys/lovetoys")
 
-function Player.Init(lovetoys, component)
-  local self = {
-    Entity = lovetoys.Entity(),
-  }
-  self.Entity:initialize()
+local player = lovetoys.Entity()
 
-  self.Entity:add(component.Position(150, 25))
-  self.Entity:add(component.Velocity(100, 100))
+function player.Init(component)
+  player:initialize()
 
-  return self
+  player:add(component.Position(150, 25))
+  player:add(component.Velocity(100, 100))
 end
 
-return Player
+return player

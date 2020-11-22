@@ -1,34 +1,34 @@
-local player = require("player")
-local component = require("component")
-local system = require("system")
-local handler = require("handler")
-
 local lovetoys = require("lovetoys/lovetoys")
 lovetoys.initialize({
   debug = true
 })
+
+local player = require("player")
+local component = require("component")
+local system = require("system")
+local handler = require("handler")
 
 local engine = {}
 local world = {}
 local eventmanager = {}
 
 function love.load()
-  Component = component.Init(lovetoys)
-  Player = player.Init(lovetoys, Component)
-  MoveSys = system:MoveSystemInit(lovetoys)
-  DrawSys = system:DrawSystemInit(lovetoys)
+  component.Init()
+  player.Init(component)
+  system.MoveSystem:MoveSystemInit()
+  system.DrawSystem:DrawSystemInit()
+
 
   engine = lovetoys.Engine()
-  engine:addEntity(Player.Entity)
-  engine:addSystem(MoveSys.MoveSystem())
-  engine:addSystem(DrawSys.DrawSystem())
-
-  print("loading...")
-  print(DrawSys.DrawSystem().requires())
+  engine:addEntity(player)
+  engine:addSystem(system.MoveSystem())
+  engine:addSystem(system.DrawSystem())
 
   world = love.physics.newWorld(0, 9.81*80, true)
   world:setCallbacks(beginContact, endContact)
   eventmanager = lovetoys.EventManager()
+  eventmanager:addListener("KeyEvent", handler, handler.keyEvent)
+  eventmanager:addListener("MouseEvent", handler, handler.mouseEvent)
 end
 
 function love.update(dt)
@@ -41,10 +41,14 @@ function love.draw()
 end
 
 function love.keypressed(key, isrepeat)
-  --eventmanager:fireEvent(handler:KeyPressed(key, isrepeat))
+  if key == "escape" then -- global exit
+    love.event.quit(0)
+    return
+  end
+  eventmanager:fireEvent(KeyEvent:init(key, isrepeat))
 end
 
 function love.mousepressed(x, y, button)
-  --eventmanager:fireEvent(handler:MousePressed(x, y, button))
+  eventmanager:fireEvent(MouseEvent:init(x, y, button))
 end
 

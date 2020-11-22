@@ -1,17 +1,12 @@
-Component = {
-  Position = {},
-  Velocity = {},
+local lovetoys = require("lovetoys/lovetoys")
+
+local component = {
+  Position = lovetoys.Component.create("position", {"x", "y"}, {x = 0, y = 0}),
+  Velocity = lovetoys.Component.create("velocity", {"vx", "vy"}),
 }
 
-Component.__index = Component
-
-function Component.Init(lovetoys)
-  local self = {
-    Position = lovetoys.Component.create("position", {"x","y"}, {x = 0, y = 0}),
-    Velocity = lovetoys.Component.create("velocity", {"vx", "vy"}),
-  }
-
-  return self
+function component.Init()
+  print("Components Init...")
 end
 
-return Component
+return component
