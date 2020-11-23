@@ -1,5 +1,3 @@
-local lovetoys = require("lovetoys/lovetoys")
-
 KeyEvent = {}
 KeyEvent.class = {name = "KeyEvent"}
 
@@ -18,16 +16,3 @@ function MouseEvent:init(x, y, button)
     self.button = button
     return self    
 end
-
-local handler = lovetoys.class("Handler")
-handler.class = {name = "Handler"}
-
-function handler:keyEvent(event)
-    print("handle key", event.key)
-end
-
-function handler:mouseEvent(event)
-    print("handle mouse", event.x, event.y, event.button)
-end
-
-return handler

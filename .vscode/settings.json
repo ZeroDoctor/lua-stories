@@ -1,0 +1,10 @@
+{
+	"Lua.diagnostics.globals": [
+		"love",
+		"beginContact",
+		"endContact"
+	],
+	"Lua.diagnostics.disable": [
+		"undefined-global"
+	]
+}
