@@ -7,12 +7,22 @@ function KeyEvent:init(key, isrepeat)
     return self
 end
 
-MouseEvent = {}
-MouseEvent.class = {name = "MouseEvent"}
+PlayerMouseEvent = {}
+PlayerMouseEvent.class = {name = "PlayerMouseEvent"}
 
-function MouseEvent:init(x, y, button)
+function PlayerMouseEvent:init(x, y, button)
     self.x = x
     self.y = y
     self.button = button
-    return self    
+    return self
+end
+
+BarrackMouseEvent = {}
+BarrackMouseEvent.class = {name = "BarrackMouseEvent"}
+
+function BarrackMouseEvent:init(x, y, button)
+    self.x = x
+    self.y = y
+    self.button = button
+    return self
 end

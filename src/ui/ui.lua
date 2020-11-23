@@ -10,6 +10,8 @@ function ui:createButton(component, display, func)
   button:add(component.Color(0.0, 0.0, 1.0, 1.0))
   button:add(component.Button(func, display))
   button:add(component.Size(50, 50))
+  button.func = func
+  print(button.func)
 	return button
 end
 

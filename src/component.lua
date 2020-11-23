@@ -6,7 +6,7 @@ local component = {
   Accel = lovetoys.Component.create("accel", {"a", "da"}),
   Color = lovetoys.Component.create("color", {"r", "g", "b", "a"}, {r = 0.0, g = 0.0, b = 0.0, a = 1.0}),
   Size = lovetoys.Component.create("size", {"w", "h"}, {w = 50, h = 50}),
-
+  RigidBody = lovetoys.Component.create("rigidbody", {"body", "shape", "fixture"}),
   Button = lovetoys.Component.create("button", {"display", "func"}, {display = "N/A", func = function() end}),
 }
 
